@@ -1,0 +1,21 @@
+backend:
+  name: github
+  repo: 你的GitHub用户名/你的仓库名    # 例如 username/my-blog
+  branch: main
+  site_domain: 你的CloudflarePages域名   # 暂时不填，以后补充
+
+media_folder: "source/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "文章"
+    folder: "source/_posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "发布日期", name: "date", widget: "datetime"}
+      - {label: "标签", name: "tags", widget: "list", required: false}
+      - {label: "分类", name: "categories", widget: "list", required: false}
+      - {label: "正文", name: "body", widget: "markdown"}
