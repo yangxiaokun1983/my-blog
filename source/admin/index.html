@@ -6,37 +6,42 @@
   <title>博客后台管理</title>
 </head>
 <body>
-  <!-- 使用 netlify-cms-app 而不是 netlify-cms -->
   <script src="https://unpkg.com/netlify-cms-app@2.15.72/dist/netlify-cms-app.js"></script>
   <script>
-    // 确保 CMS 在加载完成后立即初始化，并完全使用内联配置
-    window.CMS.init({
-      config: {
-        backend: {
-          name: 'github',
-          repo: 'yangxiaokun1983/my-blog',
-          branch: 'main',
-          auth_endpoint: '/api/auth',
-          site_domain: 'my-blog-a4b.pages.dev'
-        },
-        media_folder: 'source/images/uploads',
-        public_folder: '/images/uploads',
-        collections: [{
-          name: 'posts',
-          label: '文章',
-          folder: 'source/_posts',
-          create: true,
-          slug: '{{slug}}',
-          fields: [
-            {label: '标题', name: 'title', widget: 'string'},
-            {label: '发布日期', name: 'date', widget: 'datetime'},
-            {label: '标签', name: 'tags', widget: 'list', required: false},
-            {label: '分类', name: 'categories', widget: 'list', required: false},
-            {label: '正文', name: 'body', widget: 'markdown'}
-          ]
-        }]
+    // 等待 CMS 加载完成
+    (function waitForCMS() {
+      if (window.CMS) {
+        window.CMS.init({
+          config: {
+            backend: {
+              name: 'github',
+              repo: 'yangxiaokun1983/my-blog',
+              branch: 'main',
+              auth_endpoint: '/api/auth',
+              site_domain: 'my-blog-a4b.pages.dev'
+            },
+            media_folder: 'source/images/uploads',
+            public_folder: '/images/uploads',
+            collections: [{
+              name: 'posts',
+              label: '文章',
+              folder: 'source/_posts',
+              create: true,
+              slug: '{{slug}}',
+              fields: [
+                {label: '标题', name: 'title', widget: 'string'},
+                {label: '发布日期', name: 'date', widget: 'datetime'},
+                {label: '标签', name: 'tags', widget: 'list', required: false},
+                {label: '分类', name: 'categories', widget: 'list', required: false},
+                {label: '正文', name: 'body', widget: 'markdown'}
+              ]
+            }]
+          }
+        });
+      } else {
+        setTimeout(waitForCMS, 100);
       }
-    });
+    })();
   </script>
 </body>
 </html>
