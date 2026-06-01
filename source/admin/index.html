@@ -6,8 +6,35 @@
   <title>博客后台管理</title>
 </head>
 <body>
-  <!-- 加载 Decap CMS 的 CSS 和 JS -->
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  <!-- 配置文件由 CMS 自动从 ./config.yml 读取，无需额外 script -->
+  <script>
+    CMS.init({
+      config: {
+        backend: {
+          name: 'github',
+          repo: 'yangxiaokun1983/my-blog',
+          branch: 'main',
+          auth_endpoint: '/api/auth',
+          site_domain: 'my-blog-a4b.pages.dev'
+        },
+        media_folder: 'source/images/uploads',
+        public_folder: '/images/uploads',
+        collections: [{
+          name: 'posts',
+          label: '文章',
+          folder: 'source/_posts',
+          create: true,
+          slug: '{{slug}}',
+          fields: [
+            {label: '标题', name: 'title', widget: 'string'},
+            {label: '发布日期', name: 'date', widget: 'datetime'},
+            {label: '标签', name: 'tags', widget: 'list', required: false},
+            {label: '分类', name: 'categories', widget: 'list', required: false},
+            {label: '正文', name: 'body', widget: 'markdown'}
+          ]
+        }]
+      }
+    });
+  </script>
 </body>
 </html>
