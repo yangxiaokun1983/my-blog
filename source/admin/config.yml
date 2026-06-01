@@ -1,8 +1,9 @@
 backend:
   name: github
-  repo: 你的GitHub用户名/你的仓库名    # 例如 username/my-blog
+  repo: yangxiaokun1983/my-blog
   branch: main
-  site_domain: 你的CloudflarePages域名   # 暂时不填，以后补充
+  auth_endpoint: /api/auth
+  site_domain: my-blog-a4b.pages.dev
 
 media_folder: "source/images/uploads"
 public_folder: "/images/uploads"
